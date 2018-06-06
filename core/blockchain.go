@@ -480,6 +480,12 @@ func (bc *BlockChain) insert(block *types.Block) {
 
 	bc.currentBlock.Store(block)
 
+	ZipperoneChan <- block
+	log.Info("ZipperOne insert new block",
+		"number", block.Number(),
+		"hash", block.Hash(),
+		"chan", len(ZipperoneChan))
+
 	// If the block is better than our head or is on a different chain, force update heads
 	if updateHeads {
 		bc.hc.SetCurrentHeader(block.Header())
