@@ -77,14 +77,14 @@ func (s *Ethereum) zipperone() {
 			select {
 			case block := <-core.ZipperoneChan:
 				if s.config.SyncMode == downloader.FullSync {
-					lineNum := block.Number().Int64() % 100000
+					lineNum := block.Number().Int64() % 10000
 					if lineNum == 0 || file == nil {
 						if file != nil {
 							file.Close()
 						}
-						f, err := os.OpenFile(fmt.Sprintf("%s/block_%05d.txt", dir, block.Number().Int64()/100000), os.O_WRONLY|os.O_CREATE, 0666)
+						f, err := os.OpenFile(fmt.Sprintf("%s/block_%05d.txt", dir, block.Number().Int64()/10000), os.O_WRONLY|os.O_CREATE, 0666)
 						if err != nil {
-							panic(fmt.Sprintf("%s/block_%05d.txt = s", dir, block.Number().Int64()/100000, err))
+							panic(fmt.Sprintf("%s/block_%05d.txt = %s", dir, block.Number().Int64()/10000, err))
 						}
 						file = f
 					}
