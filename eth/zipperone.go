@@ -44,7 +44,7 @@ func (api *PrivateDebugAPI) traceBlockForZipperOne(ctx context.Context, block *t
 
 	//GetBlockByHash
 	ethapi := ethapi.NewPublicBlockChainAPI(api.eth.APIBackend)
-	bres, err := ethapi.GetBlockByHash(ctx, block.Hash(), false)
+	bres, err := ethapi.GetBlockByHash(ctx, block.Hash(), true)
 	if err != nil {
 		return res, err
 	}
